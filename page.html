@@ -2,69 +2,142 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kookaburra</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
-    body {
+    /* ========== BASE ========== */
+    * {
       margin: 0;
-      background: radial-gradient(ellipse at top, #0f0f0f 0%, #000 100%);
-      color: white;
-      font-family: 'Orbitron', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .logo {
-      font-size: 2.5rem;
-      letter-spacing: 2px;
-      margin: 1rem 0;
-      text-transform: uppercase;
-    }
-
-    .tagline {
-      font-size: 1rem;
-      color: #aaa;
-      margin-bottom: 2rem;
-    }
-
-    .link-button {
-      width: 90%;
-      max-width: 400px;
-      background: #111;
-      border: 1px solid #444;
-      color: white;
+    body {
+      background: radial-gradient(ellipse at center, #0d0221 0%, #000000 100%);
+      font-family: 'Press Start 2P', cursive;
+      color: #00ffff;
       text-align: center;
+      padding: 3rem 1rem;
+      overflow-x: hidden;
+    }
+
+    /* ========== LOGO ========== */
+    .logo {
+      font-size: 1.5rem;
+      color: #00ffff;
+      text-shadow: 0 0 6px #00ffff, 0 0 12px #00ffff;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+
+    /* ========== TAGLINE ========== */
+    .tagline {
+      font-size: 0.7rem;
+      color: #ff00cc;
+      text-shadow: 0 0 5px #ff00cc;
+      margin-bottom: 2rem;
+      opacity: 1;
+      transition: opacity 0.5s ease;
+    }
+
+    /* ========== LINK BUTTONS ========== */
+    .link-button {
+      display: block;
+      width: 90%;
+      max-width: 350px;
+      margin: 0.6rem auto;
       padding: 1rem;
-      margin: 0.5rem 0;
-      border-radius: 8px;
+      background: #111;
+      color: #00ffff;
       text-decoration: none;
-      font-size: 1.1rem;
-      transition: all 0.2s ease;
+      border: 2px solid #ff00cc;
+      border-radius: 12px;
+      box-shadow: 0 0 10px #ff00cc, inset 0 0 10px #00ffff;
+      font-size: 0.75rem;
+      transition: all 0.2s ease-in-out;
+      position: relative;
+      z-index: 1;
     }
 
     .link-button:hover {
-      background: #1db954;
-      color: black;
-      border-color: #1db954;
+      color: #000;
+      background: #ff00cc;
+      border-color: #00ffff;
+      box-shadow: 0 0 15px #00ffff, inset 0 0 5px #000;
     }
 
+    /* ========== FOOTER ========== */
     .footer {
       margin-top: 3rem;
-      font-size: 0.8rem;
+      font-size: 0.6rem;
       color: #666;
+    }
+
+    /* ========== ANIMATED BACKGROUND ========== */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 200%;
+      background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 255, 255, 0.02) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      animation: moveBg 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes moveBg {
+      from {
+        transform: translate(0, 0);
+      }
+      to {
+        transform: translate(-50%, -50%);
+      }
     }
   </style>
 </head>
 <body>
-  <div class="logo">Kookaburra</div>
-  <div class="tagline">Beats & house vibes. Plug in.</div>
+  <div class="logo">ＫＯＯＫＡＢＵＲＲＡ</div>
+  <div class="tagline" id="tagline">double down, hear that sound</div>
 
-  <a href="https://www.instagram.com/produced_by_kookaburra/" target="_blank" class="link-button">Instagram</a>
-  <a href="https://soundcloud.com/prodbykookaburra" target="_blank" class="link-button">SoundCloud</a>
+  <a href="https://www.instagram.com/produced_by_kookaburra/" target="_blank" class="link-button">Instagram 📸</a>
+  <a href="https://soundcloud.com/prodbykookaburra" target="_blank" class="link-button">SoundCloud 🔊</a>
+  <a href="https://www.tiktok.com/@produced_by_kookaburra?_t=ZT-8vmW6lhrl3C&_r=1" target="_blank" class="link-button">TikTok 🎶</a>
 
   <div class="footer">© 2025 PRODUCED BY KOOKABURRA LLC</div>
+
+  <script>
+  const taglines = [
+    "double down, hear that sound",                         // English
+    "ダブルダウン、その音を感じて",                           // Japanese
+    "doubler la mise, écoute ce son",                       // French
+    "dobla la apuesta, escucha ese sonido",                // Spanish
+    "doppelt setzen, hör diesen Klang",                     // German
+    "더블다운, 그 소리를 들어봐",                              // Korean
+    "raddoppia, senti quel suono",                         // Italian
+    "удвой ставку, услышь этот звук",                      // Russian
+    "doblihin mo, pakinggan mo ang tunog",                // Filipino (Tagalog)
+    "gemina, audi illum sonum"                             // Latin
+  ];
+
+    let current = 0;
+    const taglineEl = document.getElementById('tagline');
+
+    setInterval(() => {
+      taglineEl.style.opacity = 0;
+      setTimeout(() => {
+        current = (current + 1) % taglines.length;
+        taglineEl.textContent = taglines[current];
+        taglineEl.style.opacity = 1;
+      }, 400);
+    }, 4000);
+  </script>
 </body>
 </html>
